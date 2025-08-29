@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>  
+        <input id="Principal" type="text" placeholder="Principal"><br>
+        <br>
+        <input id="rate-of-intrest" type="text" placeholder="rate-of-intrest"><br>
+        <br>
+        <input id="time-of-holding" type="text" placeholder="time-of-holding"><br>
+        <br>
+        <button id="calcBtn">Calculate Sum</button><br>
+        <br>
+        <div id="finalsum"></div>
+        <script>
+                    document.getElementById("calcBtn").addEventListener("click", async () => {
+                        const a = document.getElementById("Principal").value;
+                        const b = document.getElementById("rate-of-intrest").value;
+                        const c = document.getElementById("time-of-holding").value;
+                        // const element = document.getElementById("finalsum");
+
+                        //using fetch to connect to a backend.....
+                        const response = await axios.get("http://localhost:3000/intrest?p="+parseInt(a)+"&r="+parseInt(b)+"&t="+parseInt(c))
+                        const ans = response.data
+
+                        document.getElementById("finalsum").innerHTML =`Simple Interest: ${ans.intrest}, Total: ${ans.total}`;
+                        // fetch("http://localhost:3000/intrest?p="+parseInt(a)+"&r="+parseInt(b)+"&t="+parseInt(c))
+                        //     .then(response => response.text())   
+                        //     .then(str => {
+                        //         const ans = JSON.parse(str);
+                        //         document.getElementById("finalsum").innerHTML =
+                        //             `Simple Interest: ${ans.intrest}, Total: ${ans.total}`;
+                        //     })
+                        //     .catch(err => console.error("Error:", err));  
+                        
+                    });
+                    // exposing the function globally so that HTML can call it
+                    
+
+        </script>
+
+    </body>
+    
+
+
+
+</html>
